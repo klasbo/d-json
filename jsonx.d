@@ -16,7 +16,7 @@
 
 module jsonx;
 
-import std.algorithm : find;
+import std.algorithm : find, sort;
 import std.ascii : isControl, isUpper, isDigit, isHexDigit, isWhite;
 import std.conv;
 import std.range;
@@ -249,7 +249,7 @@ void jsonEncode_impl(S : T[K], T, K, A)(S arr, ref A app) {
     bool first = true;
 
     // XXX provide a way to disable sorting
-    foreach(key; arr.keys.sort) {
+    foreach(key; arr.keys.sort()) {
         if(!first)
             app.put(',');
 
