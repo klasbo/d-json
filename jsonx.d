@@ -524,7 +524,7 @@ T jsonDecode_impl(T, R)(ref R input) if(isInputCharRange!R && isSomeString!T) {
                     }
 
                     /* Unicode escape state */
-                    wchar units[2];
+                    wchar[2] units;
 
                     /* Read first unit */
                     units[0] = nextUnit;
