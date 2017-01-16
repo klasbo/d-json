@@ -184,7 +184,7 @@ void jsonEncode_impl(T, A)(T val, ref A app) if(!is(T == enum) && isSomeChar!T) 
 }
 
 /* Encode number, bool */
-void jsonEncode_impl(T, A)(T val, ref A app) if(!is(T == enum) && (isNumeric!T || is(T == bool))) {
+void jsonEncode_impl(T, A)(T val, ref A app) if(!is(T == enum) && (isNumeric!T || is(Unqual!T == bool))) {
     app.put(to!string(val));
 }
 
@@ -577,7 +577,7 @@ T jsonDecode_impl(T, R)(ref R input)
 }
 
 /* Decode JSON bool -> D bool */
-bool jsonDecode_impl(T, R)(ref R input) if(isInputCharRange!R && is(T == bool)) {
+bool jsonDecode_impl(T, R)(ref R input) if(isInputCharRange!R && is(Unqual!T == bool)) {
     if(input.empty) throw new JsonException("Premature end of input.");
 
     dchar c = input.front;
